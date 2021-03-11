@@ -1,0 +1,11 @@
+.boxBar{
+    display: flex;
+    flex-flow: row;
+    height: 50%;
+    width: 100%;
+    align-items: center;
+  
+}
+
+
+    
