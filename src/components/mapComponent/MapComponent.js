@@ -1,30 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useGoogleMaps } from "react-hook-google-maps";
-import './MapComponent.css';
 
-const MapComponent = () => {
+// based on https://developers.google.com/maps/documentation/javascript/adding-a-google-map
+
+
+const MapComponent = React.memo(function Map(props) {
+
+    const [lat, setLat ]= useState(0)
+    const [lgn, setlgn ]= useState(0)
+
+    const updateCoords = () => {
+        setLat(parseInt(props.latCoordinates))
+        setlgn(parseInt(props.lgnCoordinates))
+    }
 
     const { ref, map, google } = useGoogleMaps(
-        
         'AIzaSyAR-A7EmvWIJHXem2yxnvWKUvZjlqKGFIU',
-       
         {
-            center: { lat: 0, lng: 0 },
-            zoom: 3,
-        },
+            zoom: 14,
+            center: {lat:-25.344  ,lng:131.036  },
+        }, 
     );
-    console.log(map); // instance of created Map object (https://developers.google.com/maps/documentation/javascript/reference/map)
-    console.log(google); // google API object (easily get google.maps.LatLng or google.maps.Marker or any other Google Maps class
+    console.log("render MapWithMarkers");
+
+    useEffect(() => {
+        updateCoords();
+      }, []);
+
+
+    
+
+    if (map) {
+        // execute when map object is ready
+        new google.maps.Marker({ position: {lat: lat , lng: lgn }, map });
+    }
 
     return (
-        <div className='map'>
-
-            <div ref={ref} style={{ width: '100%', height: 500 }} />
-
+        <div>
+            <div ref={ref} style={{ width: '100%', height: 400 }} />
         </div>
-    )
+    );
+})
+
+export default MapComponent
 
 
-}
 
-export default MapComponent;
+
+
+

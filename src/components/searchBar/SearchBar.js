@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
+
 import './SearchBar.css';
 
 
@@ -30,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SearchBar = ({setCoordinates}) => {
+const SearchBar = (props) => {
+
     const [inputValue, setInputvalue] = useState('')
 
     const handleInputChange = (e) => {
@@ -42,8 +44,9 @@ const SearchBar = ({setCoordinates}) => {
         e.preventDefault();
 
         if (inputValue.trim().length > 2) {
-
-            setCoordinates(inputValue);
+            let data = inputValue.split(",");
+            props.setlatCoordinates(data[0].trim());
+            props.setlgnCoordinates(data[1].trim());
             setInputvalue('');
         }
     }
@@ -52,7 +55,7 @@ const SearchBar = ({setCoordinates}) => {
 
     return (
         <div className='boxBar'>
-            <Paper component="form" className={classes.root}  onSubmit={handleSubmit}>
+            <Paper component="form" className={classes.root} onSubmit={handleSubmit}>
                 <IconButton className={classes.iconButton} aria-label="menu">
                     <MenuIcon />
                 </IconButton>
@@ -70,9 +73,10 @@ const SearchBar = ({setCoordinates}) => {
                     <DirectionsIcon />
                 </IconButton>
             </Paper>
-
         </div>
+
     );
 }
 
 export default SearchBar;
+

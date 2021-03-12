@@ -5,8 +5,9 @@ import './index.css';
 
 
 ReactDOM.render(
-  <AppGoogleMaker />,
+   <AppGoogleMaker />,
   document.getElementById('root')
-);
+
+) ;
 
 
