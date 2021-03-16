@@ -15,7 +15,7 @@ const MapComponent = React.memo(function Map(props) {
     }
 
     const { ref, map, google } = useGoogleMaps(
-        'AIzaSyAR-A7EmvWIJHXem2yxnvWKUvZjlqKGFIU',
+       ,
         {
             zoom: 14,
             center: {lat:-25.344  ,lng:131.036  },
